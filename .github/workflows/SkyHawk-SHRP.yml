@@ -152,7 +152,9 @@ jobs:
     - name: Building SkyHawk
       run: |
         cd android-recovery
+        set +e
         source build/envsetup.sh
+        set -e
         export ALLOW_MISSING_DEPENDENCIES=true
         lunch ${{ env.DEVICE_MAKEFILE }}-eng && make clean && mka ${{ inputs.BUILD_TARGET }}image -j$(nproc --all)
         echo "Done building your ${{ inputs.BUILD_TARGET }}.img"

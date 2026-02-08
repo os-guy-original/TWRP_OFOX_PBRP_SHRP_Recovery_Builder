@@ -155,7 +155,9 @@ jobs:
     - name: Building recovery
       shell: bash
       run: |
+        set +e
         source build/envsetup.sh
+        set -e
         export ALLOW_MISSING_DEPENDENCIES=true
         lunch ${{ inputs.MAKEFILE_NAME }}-eng && make clean && make recoveryimage -j$(nproc --all)
       working-directory: ${{ steps.pwd.outputs.android-recovery-folder }}
